@@ -1,1 +1,54 @@
-<p>progress works!</p>
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">Stripped Progress bar</div>
+        <div class="progress m-t-30">
+          <div class="progress-bar bg-primary active progress-bar-striped"
+               style="height:10px;"
+               [style.width]="getProgressOne"
+               role="progressbar">
+          </div>
+        </div>
+        <div class="progress m-t-30">
+          <div class="progress-bar bg-info active progress-bar-striped"
+               style="height:10px;"
+               [style.width]="getProgressTwo"
+               role="progressbar">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+
+        <app-increment (outputValue)="progressOne = $event " [inputValue]="progressOne"></app-increment>
+
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+
+        <app-increment (outputValue)="progressTwo = $event" [inputValue]="progressTwo" [btnClass]="'btn-info'">
+
+        </app-increment>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
