@@ -13,6 +13,8 @@ import {PagesComponent} from './pages.component';
 import {AppRoutingModule} from '../app-routing.module';
 import {FormsModule} from '@angular/forms';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PromisesComponent } from './promises/promises.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     DashboardComponent,
     Grafica1Component,
     PagesComponent,
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    PromisesComponent,
+    RxjsComponent
   ],
   exports: [
     ProgressComponent,
@@ -36,7 +40,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     AppRoutingModule,
     FormsModule,
     ComponentsModule,
-    
+
   ]
 })
 export class PagesModule {
