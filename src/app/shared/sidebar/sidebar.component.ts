@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import {SidebarService} from '../../services/sidebar.service';
 
@@ -9,12 +10,15 @@ import {SidebarService} from '../../services/sidebar.service';
 })
 export class SidebarComponent  {
 
+  public user: User;
+
   menuItems: any[];
   constructor(
     private sidebarService: SidebarService,
     private userService: UserService
     ) {
     this.menuItems = sidebarService.menu;
+    this.user = userService.user;
   }
 
 

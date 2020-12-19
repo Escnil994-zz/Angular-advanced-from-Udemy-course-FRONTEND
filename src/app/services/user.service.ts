@@ -11,6 +11,9 @@ import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 
 
+import { User } from "../models/user.model";
+
+
 const base_url = environment.base_url;
 
 declare const gapi: any;
@@ -21,6 +24,8 @@ declare const gapi: any;
 export class UserService {
 
   public auth2: any;
+
+  public user: User
 
   constructor(
     private http: HttpClient,
@@ -38,6 +43,14 @@ export class UserService {
           localStorage.setItem('token', res.token);
         })
       )
+  }
+
+  get token(): string {
+    return localStorage.getItem('token' || '');
+  }
+
+  get uid(): string {
+    return this.user.uid || '';
   }
 
   loginUser(formData: LoginFormInterface) {
@@ -60,22 +73,27 @@ export class UserService {
 
   validateToken(): Observable<boolean> {
 
-    const token = localStorage.getItem('token') || '';
 
 
     return this.http.get(`${base_url}/login/renew`, {
       headers: {
-        'x-token': token
+        'x-token': this.token
       }
-    }).pipe(tap((res: any) => {
+    }).pipe(map((res: any) => {
+      const { email, google, name, role, image, uid } = res.user;
+
+      this.user = new User(name, email, '', image, google, role, uid);
+
       localStorage.setItem('token', res.token);
-    }), map(res => true),
-    catchError( error => of (false)));
+
+      return true;
+    }),
+      catchError(error => of(false)));
   }
 
-  googleInit (){
+  googleInit() {
 
-    return new Promise( resolve => {
+    return new Promise(resolve => {
 
       gapi.load('auth2', () => {
         // Retrieve the singleton for the GoogleAuth library and set up the client.
@@ -92,19 +110,35 @@ export class UserService {
 
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('token');
 
-    
+
     this.auth2.signOut().then(() => {
 
-      this.ngZone.run( () => {
-        
+      this.ngZone.run(() => {
+
         this.router.navigateByUrl('/login');
 
       });
 
     });
+  }
+
+  updateUser(formData: { name: string, email: string, rol: string }) {
+
+    formData = {
+      ...formData,
+      rol: this.user.role
+    }
+
+    return this.http.put(`${base_url}/users/${this.uid}`, formData, {
+      headers: {
+        'x-token': this.token
+
+      }
+    });
+
   }
 
 }

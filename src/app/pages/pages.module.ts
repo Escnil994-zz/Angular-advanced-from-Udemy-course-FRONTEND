@@ -11,10 +11,11 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {Grafica1Component} from './grafica1/grafica1.component';
 import {PagesComponent} from './pages.component';
 import {AppRoutingModule} from '../app-routing.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     PagesComponent,
     AccountSettingsComponent,
     PromisesComponent,
-    RxjsComponent
+    RxjsComponent,
+    ProfileComponent
   ],
   exports: [
     ProgressComponent,
@@ -39,6 +41,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     SharedModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     ComponentsModule,
 
   ]
