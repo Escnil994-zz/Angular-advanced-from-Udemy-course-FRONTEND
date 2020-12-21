@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { LoginFormInterface } from "../interfaces/login-form.interface";
 import { RegisterFormInterface } from '../interfaces/register-form.interface';
+import { loadUsersInterface } from './../interfaces/load-users.interface';
 
 
 import { environment } from '../../environments/environment';
@@ -51,6 +52,14 @@ export class UserService {
 
   get uid(): string {
     return this.user.uid || '';
+  }
+
+  get headers() {
+    return {
+      headers: {
+        'x-token': this.token
+      }
+    }
   }
 
   loginUser(formData: LoginFormInterface) {
@@ -132,13 +141,34 @@ export class UserService {
       rol: this.user.role
     }
 
-    return this.http.put(`${base_url}/users/${this.uid}`, formData, {
-      headers: {
-        'x-token': this.token
-
-      }
-    });
+    return this.http.put(`${base_url}/users/${this.uid}`, formData, this.headers);
 
   }
 
+  getUsers(to: number) {
+
+    const url = `${base_url}/users/since?from=${to}`;
+    return this.http.get<loadUsersInterface>(url, this.headers).
+      pipe(
+        map(res => {
+          const users = res.users.map(
+            users => new User(users.name, users.email, '', users.image, users.google, users.role, users.uid)
+          );
+          return {
+            total: res.total,
+            users
+          };
+        })
+      )
+  }
+
+  deletUser(user: User) {
+    return this.http.delete(`${base_url}/users/${user.uid}`, this.headers)
+  }
+
+  changeRole(user: User) {
+
+    return this.http.put(`${base_url}/users/${user.uid}`, user, this.headers);
+
+  }
 }

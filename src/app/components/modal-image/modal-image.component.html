@@ -1,0 +1,42 @@
+<div id="background-image-modal" class="animated fadeIn fast" [class.modal-hide]="modalImageService.hideModal">
+
+    <div class="modal fade show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+        style="display: block; padding-right: 17px;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel1">Cargar imagen</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        (click)="closeModal()"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+
+                        <div *ngIf="!imageTemp">
+
+                            <img src="{{modalImageService.image}}" class="image-preview">
+
+                        </div>
+                        <div *ngIf="imageTemp">
+
+                            <img src="{{ imageTemp }}" class="image-preview">
+                            <p class="text-danger">Image preview</p>
+
+                        </div>
+
+
+                    </div>
+                    <input type="file" class="form-control" id="customFile"
+                        (change)="changeImage( $event.target.files[0] )" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                        (click)="closeModal()">Cerrar</button>
+                    <button type="button" (click)="uploadImage()" class="btn btn-primary">Cargar imagen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
