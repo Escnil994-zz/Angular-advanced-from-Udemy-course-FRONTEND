@@ -1,3 +1,5 @@
+import { HospitalsComponent } from './maintenances/hospitals/hospitals.component';
+import { DoctorsComponent } from './maintenances/doctors/doctors.component';
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 
@@ -29,7 +31,10 @@ const routes: Routes = [
 
 
       //Maintenances 
-      {path: 'users', component: UsersComponent, data: {title: 'Usuarios de aplicación'}}
+      {path: 'users', component: UsersComponent, data: {title: 'Usuarios de aplicación'}},
+      {path: 'doctors', component: DoctorsComponent, data: {title: 'Doctores de la aplicación'}},
+      {path: 'hospitals', component: HospitalsComponent, data: {title: 'Hospitales de la aplicación'}}
+
 
 
     ]

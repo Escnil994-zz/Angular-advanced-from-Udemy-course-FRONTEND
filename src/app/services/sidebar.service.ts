@@ -38,7 +38,7 @@ export class SidebarService {
           title: 'Hospitales', url: 'hospitals'
         },
         {
-          title: 'Gráficas', url: 'doctors'
+          title: 'Doctores', url: 'doctors'
         }
       ]
     }
