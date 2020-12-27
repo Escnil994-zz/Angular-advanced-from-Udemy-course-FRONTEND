@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import Swal from "sweetalert2";
 import { delay } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ import { Hospital } from './../../../models/hospital.model';
   styles: [
   ]
 })
-export class HospitalsComponent implements OnInit {
+export class HospitalsComponent implements OnInit, OnDestroy {
 
   public hospitals: Hospital[] = [];
 
@@ -29,6 +29,7 @@ export class HospitalsComponent implements OnInit {
     private searchesService: SearchesService
   ) { }
 
+
   ngOnInit(): void {
     this.loading = true;
 
@@ -38,6 +39,10 @@ export class HospitalsComponent implements OnInit {
       this.getHospitals();
     })
 
+  }
+
+  ngOnDestroy(): void {
+    this.imageSubs.unsubscribe();
   }
 
   getHospitals() {
@@ -135,7 +140,7 @@ export class HospitalsComponent implements OnInit {
             this.getHospitals();
 
           }, error => {
-            Swal.fire(error.error.msg, '', 'success')
+            Swal.fire(error.error.msg, '', 'error')
           });
         }
       }

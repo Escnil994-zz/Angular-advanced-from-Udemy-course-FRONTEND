@@ -62,7 +62,7 @@
                         <tbody>
                             <tr *ngFor="let hospital of hospitals">
                                 <td>
-                                    <img class="image-user cursor" 
+                                    <img class="image-user cursor"  id="resetImage"
                                     src="{{ hospital.image | images:'hospitals' }}"
                                     (click)="openModal(hospital)"
                                     >

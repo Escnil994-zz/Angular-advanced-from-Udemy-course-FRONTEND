@@ -19,6 +19,7 @@ export class FileUploadService {
     id: string
   ){
 
+
     try {
       
       const url = `${base_url}/upload/${type}/${id}`;

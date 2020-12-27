@@ -4,8 +4,9 @@ import { HttpClient } from '@angular/common/http';
 
 
 import { environment } from './../../environments/environment.prod';
-import { map } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { User } from '../models/user.model';
+import { Doctor } from '../models/doctors.model';
 
 
 const base_url = environment.base_url;
@@ -34,7 +35,7 @@ export class SearchesService {
 
   private transformUsers(results: any[]): User[] {
     return results.map(
-      users => new User(users.name, users.email, '', users.img, users.google, users.role, users.uid)
+      users => new User(users.name, users.email, '', users.image, users.google, users.role, users.uid)
     );
   }
 
@@ -43,6 +44,10 @@ export class SearchesService {
 
   }
 
+  private transformDoctors(results: any[]): Doctor[]{
+    return results;
+
+  }
 
   search(
     type: 'users' | 'doctors' | 'hospitals',
@@ -52,12 +57,16 @@ export class SearchesService {
 
     return this.http.get<any[]>(url, this.headers).pipe(map(
       (res: any) => {
+        
         switch (type) {
           case 'users':
             return this.transformUsers(res.results);
 
             case 'hospitals':
               return this.transformHospitals(res.results);
+              
+            case 'doctors':
+              return this.transformDoctors(res.results);
 
           default:
             return [];

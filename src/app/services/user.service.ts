@@ -7,7 +7,7 @@ import { loadUsersInterface } from './../interfaces/load-users.interface';
 
 
 import { environment } from '../../environments/environment';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, delay, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -134,11 +134,11 @@ export class UserService {
     });
   }
 
-  updateUser(formData: { name: string, email: string, rol: string }) {
+  updateUser(formData: { name: string, email: string, role: string }) {
 
     formData = {
       ...formData,
-      rol: this.user.role
+      role: this.user.role
     }
 
     return this.http.put(`${base_url}/users/${this.uid}`, formData, this.headers);
@@ -166,7 +166,7 @@ export class UserService {
     return this.http.delete(`${base_url}/users/${user.uid}`, this.headers)
   }
 
-  changeRole(user: User) {
+  changeRole(user: User) {    
 
     return this.http.put(`${base_url}/users/${user.uid}`, user, this.headers);
 

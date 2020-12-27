@@ -7,6 +7,7 @@ import { ModalImagesService } from './../../../services/modal-images.service';
 import { SearchesService } from './../../../services/searches.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-users',
@@ -79,6 +80,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
     this.searchesService.search('users', searchTerm).subscribe(
       (results: any) => {
+        
         this.users = results;
       },
       err => console.error(err)
@@ -110,8 +112,19 @@ export class UsersComponent implements OnInit, OnDestroy {
     })
   }
 
-  changeRole(user: User) {
-    this.userService.changeRole(user).subscribe(() => {
+  changeRole(user: User) {    
+    this.userService.changeRole(user).subscribe(res => {
+
+      if(user.role === 'ADMIN_ROLE'){
+        return Swal.fire( 'Rol cambiado exiosamente',`${user.name} es: ADMINISTRADOR`, 'success');
+      }else{
+        return Swal.fire( 'Rol cambiado exiosamente',`${user.name} es: USUARIO NORMAL`, 'success');
+
+      }
+
+    },
+    error => {
+      Swal.fire('Error', error.error.msg, 'error');
 
     });
 

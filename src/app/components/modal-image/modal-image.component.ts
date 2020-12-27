@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
+
 
 import { ModalImagesService } from './../../services/modal-images.service';
 import { FileUploadService } from 'src/app/services/file-upload.service';
@@ -10,6 +12,10 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
   styles: [
   ]
 })
+
+
+
+
 export class ModalImageComponent implements OnInit {
 
   public imageToUpload: File;
@@ -31,6 +37,10 @@ export class ModalImageComponent implements OnInit {
 
 
   changeImage(file: File) {
+
+
+
+
     this.imageToUpload = file;
 
     if (!file) {
@@ -48,22 +58,27 @@ export class ModalImageComponent implements OnInit {
   }
 
 
-  uploadImage(){
+  uploadImage() {
+
+    
 
     const id = this.modalImageService.id;
 
     const type = this.modalImageService.type;
 
-    this.fileUploadService.updateImage( this.imageToUpload, type, id )
-    .then( image =>{
-       Swal.fire('Imagen Actualizada', 'La imagen se ha actuaizado correctamente', 'success');   
+    this.fileUploadService.updateImage(this.imageToUpload, type, id)
+      .then(image => {
+        Swal.fire('Imagen Actualizada', 'La imagen se ha actuaizado correctamente', 'success');
 
-       this.modalImageService.imageChenged.emit( image );
+        this.modalImageService.imageChenged.emit(image);
 
-       this.closeModal();
+        this.closeModal();
 
-    }).catch( error => {
-      Swal.fire('Error', error.error.msg, 'error');   
-    });
+      }).catch(error => {
+        Swal.fire('Error', error.error.msg, 'error');
+      });
   }
+
+
+ 
 }

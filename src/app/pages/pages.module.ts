@@ -21,6 +21,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './maintenances/users/users.component';
 import { HospitalsComponent } from './maintenances/hospitals/hospitals.component';
 import { DoctorsComponent } from './maintenances/doctors/doctors.component';
+import { DoctorComponent } from './maintenances/doctors/doctor.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { DoctorsComponent } from './maintenances/doctors/doctors.component';
     ProfileComponent,
     UsersComponent,
     HospitalsComponent,
-    DoctorsComponent
+    DoctorsComponent,
+    DoctorComponent
   ],
   exports: [
     ProgressComponent,
