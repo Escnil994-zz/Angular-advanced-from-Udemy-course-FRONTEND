@@ -34,13 +34,12 @@ export class RegisterComponent {
 
   createUser() {
     this.formSubmitted = true;
-    console.log(this.registerForm.value);
+
 
 
     if ((this.registerForm.valid) && (this.registerForm.value.terms === true )) {
       
       this.userService.createUser(this.registerForm.value).subscribe(res => {
-        console.log(res);
         Swal.fire({
           title: 'Success!',
           text: `Welcome ${this.registerForm.value.name} you're registered correctly`,
@@ -59,7 +58,7 @@ export class RegisterComponent {
         });
       });
     } else {
-      console.log('Could not post');
+      
     }
   }
 

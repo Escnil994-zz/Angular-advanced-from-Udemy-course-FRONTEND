@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { AuthGuard } from "../guards/auth.guard";
+import { AdminGuard } from "../guards/admin.guard";
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -14,6 +15,10 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from "./profile/profile.component";
 import { UsersComponent } from './maintenances/users/users.component';
 import { DoctorComponent } from './maintenances/doctors/doctor.component';
+import { SearchesComponent } from './searches/searches.component';
+
+
+
 
 const routes: Routes = [
   {
@@ -32,10 +37,13 @@ const routes: Routes = [
 
 
       //Maintenances 
-      { path: 'users', component: UsersComponent, data: { title: 'Usuarios de aplicación' } },
       { path: 'hospitals', component: HospitalsComponent, data: { title: 'Hospitales de la aplicación' } },
       { path: 'doctors', component: DoctorsComponent, data: { title: 'Doctores de la aplicación' } },
-      { path: 'doctors/:id', component: DoctorComponent, data: { title: 'Hospital seleccionado' } }
+      { path: 'doctors/:id', component: DoctorComponent, data: { title: 'Hospital seleccionado' } },
+      { path: 'search/:term', component: SearchesComponent, data: { title: 'resultado de busqueda' } },
+
+      //Admin Role 
+      { path: 'users', canActivate: [AdminGuard], component: UsersComponent, data: { title: 'Usuarios de aplicación' } },
 
 
 

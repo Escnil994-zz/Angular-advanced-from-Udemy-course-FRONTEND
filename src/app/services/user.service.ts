@@ -35,13 +35,27 @@ export class UserService {
   ) {
     this.googleInit();
   }
+  
+  saveInLocalStorage( token: string, menu: any ){
+
+    localStorage.setItem('token', token)
+
+    localStorage.setItem('menu', JSON.stringify(menu) )
+
+  }
+
+  get role(): 'ADMIN_ROLE' | 'USER_ROLE'{
+    return this.user.role;
+  }
 
   createUser(formData: RegisterFormInterface) {
 
     return this.http.post(`${base_url}/users`, formData)
       .pipe(
         tap((res: any) => {
-          localStorage.setItem('token', res.token);
+
+          this.saveInLocalStorage( res.token, res.menu );
+
         })
       )
   }
@@ -66,7 +80,9 @@ export class UserService {
     return this.http.post(`${base_url}/login`, formData)
       .pipe(
         tap((res: any) => {
-          localStorage.setItem('token', res.token);
+
+          this.saveInLocalStorage( res.token, res.menu );
+
         })
       )
   }
@@ -75,7 +91,9 @@ export class UserService {
     return this.http.post(`${base_url}/login/google`, { token })
       .pipe(
         tap((res: any) => {
-          localStorage.setItem('token', res.token);
+          
+          this.saveInLocalStorage( res.token, res.menu );
+
         })
       )
   }
@@ -93,7 +111,7 @@ export class UserService {
 
       this.user = new User(name, email, '', image, google, role, uid);
 
-      localStorage.setItem('token', res.token);
+      this.saveInLocalStorage( res.token, res.menu );
 
       return true;
     }),

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
@@ -8,18 +9,42 @@ import { UserService } from 'src/app/services/user.service';
   styles: [
   ]
 })
-export class HeaderComponent  {
+export class HeaderComponent implements OnInit  {
 
   public user: User;
 
-  constructor( private userService: UserService) { 
+  public visibles:boolean = false;
+
+  constructor( 
+    private userService: UserService,
+    private router: Router
+    ) { 
     this.user = userService.user;
   }
+  ngOnInit(): void {
+
+
+  }
+
 
 
 
   logout(){
     this.userService.logout();
   }
+
+  search( term ){
+
+    if ( term == '') {
+    this.router.navigateByUrl(`/dashboard/`);
+    }
+    this.router.navigateByUrl(`/dashboard/search/${term}`);
+
+    document.getElementById('form').style.display='none';
+
+    
+  }
+
+
 
 }

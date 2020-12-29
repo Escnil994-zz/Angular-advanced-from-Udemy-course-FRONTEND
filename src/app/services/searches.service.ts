@@ -39,15 +39,25 @@ export class SearchesService {
     );
   }
 
-  private transformHospitals(results: any[]): Hospital[]{
+  private transformHospitals(results: any[]): Hospital[] {
     return results;
 
   }
 
-  private transformDoctors(results: any[]): Doctor[]{
+  private transformDoctors(results: any[]): Doctor[] {
     return results;
 
   }
+
+
+  globalSearch( searchTerm ) {
+
+    const url = `${base_url}/all/${searchTerm}`;
+
+    return this.http.get( url, this.headers );
+
+  }
+
 
   search(
     type: 'users' | 'doctors' | 'hospitals',
@@ -57,16 +67,16 @@ export class SearchesService {
 
     return this.http.get<any[]>(url, this.headers).pipe(map(
       (res: any) => {
-        
+
         switch (type) {
           case 'users':
             return this.transformUsers(res.results);
 
-            case 'hospitals':
-              return this.transformHospitals(res.results);
-              
-            case 'doctors':
-              return this.transformDoctors(res.results);
+          case 'hospitals':
+            return this.transformHospitals(res.results);
+
+          case 'doctors':
+            return this.transformDoctors(res.results);
 
           default:
             return [];

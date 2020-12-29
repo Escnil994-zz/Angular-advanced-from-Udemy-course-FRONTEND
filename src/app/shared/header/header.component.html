@@ -19,7 +19,9 @@
                     <!-- dark Logo text -->
                     <img src="./assets/images/logo-text.png" alt="homepage" class="dark-logo" />
                     <!-- Light Logo text -->
-                    <img src="./assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
+                    <img src="./assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                </span>
+            </a>
         </div>
         <!-- ============================================================== -->
         <!-- End Logo -->
@@ -46,9 +48,13 @@
                 <li class="nav-item hidden-xs-down search-box"> <a
                         class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i
                             class="ti-search"></i></a>
-                    <form class="app-search">
-                        <input type="text" class="form-control" placeholder="Search & enter"> <a class="srh-btn"><i
-                                class="ti-close"></i></a> </form>
+                    <form class="app-search" (submit)="search( term.value )" id="form">
+                        <input type="text" class="form-control" placeholder="Aqui puedes buscar lo que necesitas"
+                            autofocus #term>
+                        <a class="srh-btn">
+                            <i class="ti-close"></i>
+                        </a>
+                    </form>
                 </li>
                 <!-- ============================================================== -->
                 <!-- Comment -->
@@ -209,7 +215,8 @@
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li><a routerLinkActive="active" routerLink="./profile"><i class="ti-user"></i> My Profile</a></li>
+                            <li><a routerLinkActive="active" routerLink="./profile"><i class="ti-user"></i> My
+                                    Profile</a></li>
                             <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
                             <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
                             <li role="separator" class="divider"></li>

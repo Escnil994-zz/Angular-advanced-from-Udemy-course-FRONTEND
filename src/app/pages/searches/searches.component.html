@@ -1,0 +1,100 @@
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Usuarios ({{totalUsers}})</h4>
+
+                <div *ngIf="users.length === 0" class="alert alert-info">
+                    <p class="mb-0">No hay usuarios con ese nombre</p>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr *ngIf="users.length > 0">
+                                <th>foto</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of users" >
+                                <th>
+
+                                    <img [src]= " user.image | images:'users'" class="image-user">
+                                </th>
+                                <th>{{user.name}}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Doctores ({{ totalDoctors }})</h4>
+
+                <div *ngIf="doctors.length === 0" class="alert alert-info">
+                    <p class="mb-0">No hay doctores con ese nombre</p>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr *ngIf="doctors.length > 0">
+                                <th>foto</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let doctor of doctors" class="cursor hover-look" routerLink="/dashboard/doctors/{{doctor.uid}}">
+                                <th>
+
+                                    <img [src]= " doctor.image | images:'doctors'" class="image-user">
+                                </th>
+                                <th>{{doctor.name}}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Hospitales  ({{totalHospitals}})</h4>
+
+                <div *ngIf="hospitals.length === 0" class="alert alert-info">
+                    <p class="mb-0">No hay hospitales con ese nombre</p>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr *ngIf="hospitals.length > 0">
+                                <th>foto</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let hospital of hospitals">
+                                <th>
+
+                                    <img [src]= " hospital.image | images:'hospitals'" class="image-user">
+                                </th>
+                                <th>{{hospital.name}}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

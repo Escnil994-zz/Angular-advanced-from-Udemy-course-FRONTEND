@@ -50,3 +50,7 @@
 .modal-hide{
   display: none;
 }
+
+.hover-look:hover{
+  background-color: rgb(228, 246, 248);
+}
